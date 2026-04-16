@@ -1,79 +1,175 @@
-Coffee Shop Customer Service Chatbot 🚀☕️
-Welcome to the Coffee Shop Customer Service Chatbot project! This repository contains the code, resources, and instructions to build an AI-powered chatbot designed to enhance customer experiences in a coffee shop app. Leveraging the power of LLMs (Large Language models), Natural Language Processing (NLP), and RunPod's infrastructure, this chatbot can assist with taking orders, answering detailed menu queries, and providing personalized product recommendations—all within a React Native mobile app.
+# ☕ Coffee Shop Customer Service Chatbot 🚀
 
-🎯 Project Overview
-The goal of this project is to create a smart, agent-based chatbot that can:
+An **Agentic AI-powered chatbot system** designed to enhance customer experience in a coffee shop application. This project leverages **LLMs, RAG (Retrieval-Augmented Generation), and a recommendation engine** to handle real-time interactions such as ordering, answering queries, and suggesting products.
 
-Handle real-time customer interactions with the chatbot including orders.
-Answer questions about menu items, including ingredients and allergens through a Retreival augmented Generation (RAG) system.
-Provide personalized product recommendations through a market basket analysis recommendation engine.
-Guide customers through a seamless order process, ensuring accurate and structured order details.
-Block irrelevant or harmful queries using a Guard Agent for safe and relevant interactions.
+---
 
-🔧 What You'll Learn
-Through this project, you will gain hands-on experience in:
+## 🎯 Project Overview
 
-Deploying your personal LLM with RunPod
-Deploying an agent-based system with specialized agents like Order Taking, Details, and Guard agents.
-Setting up a vector database for storing coffee shop menu and product information.
-Implementing Retrieval-Augmented Generation (RAG) for detailed and accurate responses.
-Training and deploying a recommendation engine.
-Building a React Native app that integrates this powerful chatbot.
-🧠 Chatbot Agent Architecture
-Coffee Shop Agent Architecture
+This project implements a **multi-agent architecture** where each agent is responsible for a specific task, enabling scalable and modular conversational AI.
 
-The chatbot in this project is designed using a modular agent-based architecture, where each agent is responsible for a specific task, ensuring a seamless and efficient interaction between the user and the coffee shop’s services. This architecture enables the chatbot to perform complex actions by delegating tasks to specialized agents, making the system highly flexible, scalable, and easy to extend.
+### ✅ Key Capabilities:
 
-🤖 Key Agents in the System:
-Guard Agent: This agent acts as the first line of defense. It monitors all incoming user queries and ensures that only relevant and safe messages are processed by the other agents. It blocks inappropriate, harmful, or irrelevant queries, protecting the system and ensuring smooth conversations with users.
+* 🛒 **Order Management** – Handles multi-step order conversations with structured outputs
+* 📚 **Menu Q&A (RAG)** – Answers questions about menu items, ingredients, allergens using vector search
+* 🎯 **Personalized Recommendations** – Suggests products using Apriori + popularity-based methods
+* 🛡️ **Query Filtering** – Blocks irrelevant or unsafe queries using a Guard Agent
+* ⚡ **Real-time Chatbot Integration** – Works seamlessly with a React Native mobile app
 
-Order Taking Agent: This agent is responsible for guiding customers through the order placement process. It uses chain-of-thought prompt engineering to simulate human-like reasoning, ensuring the order is accurately structured and all customer preferences are captured. It ensures that the chatbot gathers all necessary order details in a logical, step-by-step process, enhancing the reliability of the final order.
+---
 
-Details Agent (RAG System): Powered by a Retrieval-Augmented Generation (RAG) system, the Details Agent answers specific customer questions about the coffee shop, including menu details, ingredients, allergens, and other frequently asked questions. It retrieves relevant data stored in the vector database and combines it with language generation capabilities to provide clear and precise responses.
+## 🧠 System Architecture (Agentic AI)
 
-Recommendation Agent: This agent handles personalized product recommendations by working with the market basket recommendation engine. Triggered by the Order Taking Agent, it analyzes the user's current order or preferences and suggests complementary items. This agent aims to boost upselling opportunities or help users discover new products they might like.
-Classification Agent: This is the decision-making agent. It classifies incoming user queries and determines which agent is best suited to handle the task. By categorizing user intents, it ensures that queries are routed efficiently, whether the user is asking for recommendations, placing an order, or inquiring about specific menu details.
+The chatbot follows a **modular multi-agent pipeline**, improving control, scalability, and reliability.
 
-⚙️ How the Agents Work Together
-The agents work collaboratively in a pipeline architecture to process user inputs:
+### 🤖 Core Agents:
 
-1.A customer query is received and first assessed by the Guard Agent.
-2.If valid, the Classification Agent determines the intent behind the user query (e.g., placing an order, asking about a product, or requesting a recommendation).
-3.The query is then forwarded to the appropriate agent:
-3(i)The Order Taking Agent handles order-related queries.
-3(ii)Order Agent can forward the order to the recommendation agent to try and upsell the user near the end of their order.
-3(iii)The Details Agent fetches specific menu information.
-3(iv)The Recommendation Agent suggests complementary products.
-📱 React Native Coffee Shop App
-Coffee Shop Agent Architecture
+* **Guard Agent**
 
-The React Native Coffee Shop App serves as the front-end interface for customers to interact with the AI-powered chatbot and explore the menu. Designed with a clean, intuitive user experience in mind, the app seamlessly integrates the chatbot for real-time customer service, enabling users to place orders, receive personalized product recommendations, and get detailed information about menu items.
+  * Filters unsafe or irrelevant queries
+  * Ensures only valid requests are processed
 
-Key Features:
-Landing Page: A welcoming entry point to the coffee shop experience.
-Home Page: Displays featured menu items and product categories.
-Item Details Page: Provides detailed descriptions, including ingredients and allergens for each item.
-Cart Page: Allows users to review and modify their order before checkout.
-Chatbot Interface: Enables customers to interact directly with the AI chatbot for order assistance, recommendations, and queries.
+* **Classification Agent**
 
-📂 Directory Structure
-├── coffee_shop_customer_service_chatbot
-│   ├── coffee_shop_app_folder # Contains React Native app code   
-│   ├── python_code
-│       ├── API/               # Chatbot API for agent-based system
-│       ├── dataset/           # Dataset for training recommendation engine    
-│       ├── products/          # Product data (names, prices, descriptions, images)   
-│       ├── build_vector_database.ipynb             # Builds vector database for RAG model   
-│       ├── firebase_uploader.ipynb                 # Uploads products to Firebase    
-│       ├── recommendation_engine_training.ipynb    # Trains recommendation engine 
+  * Routes user queries to the appropriate agent
+  * Handles intent detection
 
-🚀 Getting Started
-Each folder has their own getting started section. So this way we can deploy the front end, backend and setup individually.
+* **Details Agent (RAG)**
 
-🔗 Refrence Links
-RunPod: RunPod Official Site - Infrastructure for deploying and scaling machine learning models.
-Kaggle Dataset: Source of the dataset used for training the recommendation engine.
-Figma app design: - The design mockups for the coffee shop app, providing a visual guide for the user interface and experience.
-Hugging Face: Hugging Face Models - Repository for Llama LLms, a state-of-the-art NLP model used in our chatbot.
-Pinecone: Pinecone Documentation - Documentation for the vector database used in the project.
-Firebase: Firebase Documentation - Comprehensive guide for using Firebase to manage app data for the coffee shop app.
+  * Uses **Pinecone vector database + embeddings**
+  * Retrieves relevant knowledge and generates accurate responses
+
+* **Order Taking Agent**
+
+  * Manages multi-turn conversations
+  * Maintains **conversation memory**
+  * Validates menu items and calculates total order
+
+* **Recommendation Agent**
+
+  * Uses:
+
+    * 📊 **Apriori Algorithm** (frequent itemsets)
+    * 📈 **Popularity-based filtering**
+  * Suggests complementary products
+
+---
+
+## 🔄 Workflow
+
+```text
+User Input
+   ↓
+Guard Agent (validation)
+   ↓
+Classification Agent (intent detection)
+   ↓
+Selected Agent:
+   ├── OrderTakingAgent
+   ├── DetailsAgent (RAG)
+   └── RecommendationAgent
+```
+
+---
+
+## 🛠️ Tech Stack
+
+* **LLM Serving:** RunPod (OpenAI-compatible APIs)
+* **Backend:** Python
+* **Vector DB:** Pinecone
+* **Frontend:** React Native
+* **Recommendation Engine:** Apriori + Pandas
+* **Monitoring (optional):** Grafana
+* **Caching (optional):** Redis
+
+---
+
+## 📱 React Native App
+
+The frontend provides a clean interface for users to:
+
+* Browse menu items
+* View product details
+* Manage cart
+* Interact with chatbot in real-time
+
+---
+
+## 📂 Project Structure
+
+```
+coffee_shop_customer_service_chatbot/
+│
+├── coffee_shop_app_folder/       # React Native frontend
+├── python_code/
+│   ├── API/                     # Backend APIs (Agent system)
+│   ├── dataset/                 # Data for recommendation engine
+│   ├── products/                # Product metadata
+│   ├── build_vector_database.ipynb
+│   ├── firebase_uploader.ipynb
+│   ├── recommendation_engine_training.ipynb
+```
+
+---
+
+## 🚀 Key Features & Highlights
+
+* 🔹 Multi-agent orchestration (AgentController pattern)
+* 🔹 Retrieval-Augmented Generation (RAG) for factual responses
+* 🔹 Structured JSON outputs for reliable pipelines
+* 🔹 Conversation memory handling
+* 🔹 Hybrid recommendation system
+* 🔹 Scalable and modular architecture
+
+---
+
+## ⚠️ Challenges & Learnings
+
+* ❗ **Handling invalid JSON outputs from LLMs**
+
+  * Fixed using a secondary validation layer
+
+* ❗ **Maintaining conversation state**
+
+  * Solved using structured memory in messages
+
+* ❗ **Incorrect intent classification**
+
+  * Improved with prompt tuning and context limiting
+
+* ❗ **Balancing latency vs accuracy**
+
+  * Optimized using limited context and efficient retrieval
+
+---
+
+## 🔗 References
+
+* RunPod – Model deployment infrastructure
+* Pinecone – Vector database for RAG
+* Hugging Face – LLM models
+* Firebase – App data management
+* Kaggle – Dataset for recommendation system
+
+---
+
+## 🎯 Future Improvements
+
+* Add **confidence scoring for classification**
+* Implement **fallback/retry mechanisms**
+* Integrate **LangGraph for better state management**
+* Add **evaluation metrics (latency, accuracy, recall)**
+
+---
+
+## 🙌 Conclusion
+
+This project demonstrates how to build a **production-style AI system** using:
+
+* Agentic workflows
+* Retrieval systems
+* Recommendation engines
+
+It goes beyond a simple chatbot and focuses on **scalability, modularity, and real-world usability**.
+
+---
